@@ -43,8 +43,8 @@ const CHANNELS = [
     idx: "02",
     title: "GitHub Organization",
     body: "All our code is public. Star our repos, fork them, and open your first Pull Request.",
-    link: "https://github.com/vcet-foss",
-    linkLabel: "github.com/vcet-foss",
+    link: "https://github.com/onlyfossorg",
+    linkLabel: "github.com/onlyfossorg",
     bg: "rgba(255,255,255,.07)",
     ic: "#ffffff",
   },
@@ -135,7 +135,7 @@ const Community: React.FC = () => (
         <div className="mb-16 relative pb-8">
           <div className="pg-hline" />
           <RevealOnScroll>
-            <p className="pg-eyebrow">VCET FOSS</p>
+            <p className="pg-eyebrow">ONLY FOSS ORG</p>
             <h1
               className="font-display font-bold text-white jersey-25-regular"
               style={{
@@ -167,9 +167,10 @@ const Community: React.FC = () => (
                 paddingLeft: "1rem",
               }}
             >
-              Coding is better when it's collaborative. VCET FOSS is more than
-              just a club — it's a network of mentors, peers, and friends who
-              help each other ship better software.
+              Coding is better when it's collaborative. ONLY FOSS ORG is an
+              independent community — a network of mentors, peers, and friends
+              who help each other ship better software. If you are a builder,
+              an indie hacker, or just a beginner — you are most welcome.
             </p>
           </RevealOnScroll>
         </div>
@@ -351,7 +352,7 @@ const Community: React.FC = () => (
                     Pitch your idea to the community and find teammates.
                   </p>
                   <a
-                    href="https://github.com/vcet-foss/awesome-foss/blob/main/ADD_PROJECT.md"
+                    href="https://github.com/onlyfossorg/awesome-foss/blob/main/ADD_PROJECT.md"
                     target="_blank"
                     rel="noopener noreferrer"
                   >
