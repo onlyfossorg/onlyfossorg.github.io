@@ -59,7 +59,7 @@ const Hackathons: React.FC = () => (
         <div className="mb-14 relative pb-8">
           <div className="pg-hline" />
           <RevealOnScroll>
-            <p className="pg-eyebrow">VCET FOSS</p>
+            <p className="pg-eyebrow">ONLY FOSS ORG</p>
             <h1
               className="font-display font-bold text-white jersey-25-regular mb-5"
               style={{
@@ -130,7 +130,7 @@ const Hackathons: React.FC = () => (
               week-long challenge, we've got you covered.
             </p>
             <a
-              href="mailto:vcetopensource@gmail.com"
+              href="mailto:onlyfoss.org@gmail.com"
               className="inline-flex items-center gap-2 px-6 py-3 bg-foss-green text-black font-mono text-sm font-bold hover:bg-foss-green/90 transition-colors"
             >
               Get in Touch <ArrowUpRight className="w-4 h-4" />

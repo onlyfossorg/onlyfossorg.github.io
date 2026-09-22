@@ -408,7 +408,7 @@ const CodeOfConduct: React.FC = () => (
                     "GitHub repositories and discussions",
                     "Discord server and community channels",
                     "Events, workshops, and hackathons",
-                    "Social media and online platforms representing VCET FOSS",
+                    "Social media and online platforms representing ONLY FOSS ORG",
                     "Any official communication channels",
                   ].map((s) => (
                     <div key={s} className="coc-list-item">
@@ -508,10 +508,10 @@ const CodeOfConduct: React.FC = () => (
                     behavior may be reported to community leaders at:
                   </p>
                   <a
-                    href="mailto:vcetopensource@gmail.com"
+                    href="mailto:onlyfoss.org@gmail.com"
                     className="inline-flex items-center gap-2 px-6 py-3 bg-foss-green text-black font-mono text-sm font-bold hover:bg-foss-green/90 transition-colors"
                   >
-                    vcetopensource@gmail.com
+                    onlyfoss.org@gmail.com
                   </a>
                   <p className="text-gray-600 font-mono text-xs mt-4">
                     All complaints will be reviewed and investigated promptly

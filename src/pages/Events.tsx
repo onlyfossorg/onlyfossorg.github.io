@@ -12,10 +12,10 @@ import GlitchText from "../components/GlitchText";
 // }
 // const EVENTS: Event[] = [
 //     { id:"1", title:"Open Source Workshop: Git & GitHub", date:"2026-03-15", type:"Workshop",
-//       location:"VCET Campus, Lab 301", status:"upcoming", attendees:45, registrationLink:"#",
+//       location:"Community Lab", status:"upcoming", attendees:45, registrationLink:"#",
 //       description:"Learn the fundamentals of Git version control and GitHub collaboration." },
 //     { id:"2", title:"FOSS Community Meetup", date:"2026-02-20", type:"Meetup",
-//       location:"VCET Auditorium", status:"past", attendees:32,
+//       location:"Community meetup", status:"past", attendees:32,
 //       description:"Monthly community gathering to discuss ongoing projects." },
 // ];
 // ─────────────────────────────────────────────────────────────────────────────
@@ -86,7 +86,7 @@ const Events: React.FC = () => (
         <div className="mb-14 relative pb-8">
           <div className="pg-hline" />
           <RevealOnScroll>
-            <p className="pg-eyebrow">VCET FOSS</p>
+            <p className="pg-eyebrow">ONLY FOSS ORG</p>
             <h1
               className="font-display font-bold text-white jersey-25-regular mb-5"
               style={{
@@ -264,7 +264,7 @@ const Events: React.FC = () => (
               talks. Have an idea? Let's make it happen!
             </p>
             <a
-              href="mailto:vcetopensource@gmail.com"
+              href="mailto:onlyfoss.org@gmail.com"
               className="inline-flex items-center gap-2 px-6 py-3 bg-foss-green text-black font-mono text-sm font-bold hover:bg-foss-green/90 transition-colors"
             >
               Propose an Event <ArrowUpRight className="w-4 h-4" />

@@ -8,7 +8,7 @@ import {
 } from "lucide-react";
 import { NavLink } from "react-router-dom";
 import RevealOnScroll from "../components/RevealOnScroll.tsx";
-import fossLogo from "../assets/vf-1-1-green.svg";
+import fossLogo from "../assets/of-1-1-green-s.svg";
 
 /* ─── link row ─── */
 const FooterLink: React.FC<{
@@ -204,7 +204,7 @@ const Footer: React.FC = () => {
                     />
                     <img
                       src={fossLogo}
-                      alt="VCET FOSS"
+                      alt="ONLY FOSS ORG"
                       className="logo-glitch relative z-10"
                       style={{ width: 46, height: 46, objectFit: "contain" }}
                     />
@@ -219,7 +219,7 @@ const Footer: React.FC = () => {
                         letterSpacing: "0.05em",
                       }}
                     >
-                      VCET FOSS
+                      ONLY FOSS ORG
                     </p>
                     <p
                       style={{
@@ -256,7 +256,7 @@ const Footer: React.FC = () => {
                   }}
                 >
                   <Terminal className="inline w-3 h-3 mr-2 opacity-60" />
-                  vcetfoss@github:~${" "}
+                  onlyfossorg@github:~${" "}
                   <span style={{ color: "rgba(0,255,127,.85)" }}>
                     git commit --open-source
                   </span>
@@ -266,7 +266,7 @@ const Footer: React.FC = () => {
                 {/* social buttons */}
                 <div className="flex items-center gap-3">
                   <a
-                    href="https://github.com/vcet-foss"
+                    href="https://github.com/onlyfossorg"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="social-btn"
@@ -291,7 +291,7 @@ const Footer: React.FC = () => {
                     </svg>
                   </a>
                   <a
-                    href="mailto:vcetopensource@gmail.com"
+                    href="mailto:onlyfoss.org@gmail.com"
                     className="social-btn"
                     aria-label="Email"
                   >
@@ -322,13 +322,13 @@ const Footer: React.FC = () => {
                 <div className="col-heading">Resources</div>
                 <nav className="flex flex-col">
                   <FooterLink to="/documentation">Documentation</FooterLink>
-                  <FooterLink href="https://github.com/vcet-foss" external>
+                  <FooterLink href="https://github.com/onlyfossorg" external>
                     GitHub Org
                   </FooterLink>
                   <FooterLink to="/project-guidelines">
                     Project Guidelines
                   </FooterLink>
-                  <FooterLink href="mailto:vcetopensource@gmail.com">
+                  <FooterLink href="mailto:onlyfoss.org@gmail.com">
                     Contact Us
                   </FooterLink>
                 </nav>
@@ -352,7 +352,7 @@ const Footer: React.FC = () => {
                   style={{ background: "#00ff7f" }}
                 />
                 <p className="text-gray-500 text-xs font-mono tracking-wider">
-                  © {new Date().getFullYear()} VCET FOSS Community.{" "}
+                  © {new Date().getFullYear()} ONLY FOSS ORG.{" "}
                   <span style={{ color: "rgba(0,255,127,.5)" }}>
                     Open source forever.
                   </span>

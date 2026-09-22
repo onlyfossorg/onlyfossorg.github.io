@@ -4,7 +4,7 @@ import type { Project } from "../utils/types";
 // In production, fetch from the awesome-foss repo's generated JSON.
 // During local development, fall back to the bundled copy.
 const PROJECTS_URL =
-  "https://raw.githubusercontent.com/vcet-foss/awesome-foss/main/dev/generated/projects.json";
+  "https://raw.githubusercontent.com/onlyfossorg/awesome-foss/main/dev/generated/projects.json";
 
 // Bundled fallback for local development / offline
 const FALLBACK_PROJECTS: Project[] = [
@@ -29,15 +29,15 @@ const FALLBACK_PROJECTS: Project[] = [
     domain: ["Web"],
   },
   {
-    slug: "vcet-foss-web",
-    name: "VCET FOSS Website",
-    tagline: "The official VCET FOSS community website",
+    slug: "only-foss-web",
+    name: "ONLY FOSS ORG Website",
+    tagline: "The official ONLY FOSS ORG community website",
     description:
-      "The open-source website for the VCET FOSS community — built with React, Vite, and Tailwind CSS.",
+      "The open-source website for the ONLY FOSS ORG community — built with React, Vite, and Tailwind CSS.",
     status: "active",
     difficulty: "beginner",
     tech_stack: ["React", "TypeScript", "Tailwind CSS", "Vite"],
-    github_repo: "https://github.com/vcet-foss/vcet-foss",
+    github_repo: "https://github.com/onlyfossorg/onlyfossorg.github.io",
     maintainers: [
       { name: "Ritesh Gharat", contact: "https://github.com/riteshgharat" },
     ],
@@ -53,7 +53,7 @@ const FALLBACK_PROJECTS: Project[] = [
     status: "idea",
     difficulty: "intermediate",
     tech_stack: ["ESP32", "Python", "Firebase"],
-    github_repo: "https://github.com/vcet-foss/smart-irrigation",
+    github_repo: "https://github.com/onlyfossorg/smart-irrigation",
     maintainers: [
       { name: "Ritesh Gharat", contact: "https://github.com/riteshgharat" },
     ],
@@ -69,7 +69,7 @@ const FALLBACK_PROJECTS: Project[] = [
     status: "dormant",
     difficulty: "advanced",
     tech_stack: ["Python", "Next.js", "MongoDB"],
-    github_repo: "https://github.com/vcet-foss/study-buddy-ai",
+    github_repo: "https://github.com/onlyfossorg/study-buddy-ai",
     maintainers: [
       { name: "Ritesh Gharat", contact: "https://github.com/riteshgharat" },
     ],

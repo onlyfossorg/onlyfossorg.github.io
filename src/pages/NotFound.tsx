@@ -179,7 +179,7 @@ const NotFound: React.FC = () => (
             </button>
           </NavLink>
           <a
-            href="https://github.com/vcet-foss"
+            href="https://github.com/onlyfossorg"
             target="_blank"
             rel="noopener noreferrer"
           >

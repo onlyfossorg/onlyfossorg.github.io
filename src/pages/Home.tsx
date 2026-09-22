@@ -133,7 +133,7 @@ const Home: React.FC = () => {
               {/* badge */}
               <div className="hero-badge">
                 <span className="badge-dot" />
-                VCET FREE &amp; OPEN SOURCE COMMUNITY
+                ONLY FOSS ORG FREE &amp; OPEN SOURCE COMMUNITY
               </div>
 
               {/* headline — GlitchText unchanged, word-by-word glitch on load */}
@@ -172,7 +172,7 @@ const Home: React.FC = () => {
                 }}
               >
                 <GlitchText
-                  text="A community of student developers at VCET solving real campus problems. Stop building alone. Join the movement !"
+                  text="An independent community that open-sources old college projects and runs small competitions and hackathons. Stop building alone. Join the movement !"
                   as="p"
                   speed={30}
                   className="text-gray-400 font-mono text-lg leading-relaxed"
@@ -212,7 +212,7 @@ const Home: React.FC = () => {
           <div className="max-w-7xl mx-auto px-6 lg:px-8">
             <RevealOnScroll>
               <div className="mb-14">
-                <p className="section-eyebrow">WHY VCET FOSS</p>
+                <p className="section-eyebrow">WHY ONLY FOSS ORG</p>
                 <h2
                   style={{
                     fontFamily: '"Jersey 25", monospace',
@@ -343,8 +343,8 @@ const Home: React.FC = () => {
                     marginBottom: "2.5rem",
                   }}
                 >
-                  Whether you're a complete beginner or a seasoned pro, there's
-                  a place for you here.
+                  If you are a builder, an indie hacker, or just a beginner —
+                  you are most welcome.
                 </p>
                 <div className="flex flex-col sm:flex-row gap-3">
                   <button

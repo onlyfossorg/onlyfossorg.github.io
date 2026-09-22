@@ -1,18 +1,18 @@
-![src/assets/vcet-foss-light.svg](src/assets/vcet-foss-light.svg)
+![src/assets/only-foss-light.svg](src/assets/only-foss-light.svg)
 
-# VCET FOSS
+# ONLY FOSS ORG
 
-**Building the future of Open Source at VCET.**
+**An independent community that open-sources old college projects and runs small competitions and hackathons.**
 
-[Live Demo](https://vcet-foss.github.io/) • [Community](https://github.com/vcet-foss) • [Report Bug](https://github.com/vcet-foss/vcet-foss.github.io/issues)
+[Live Demo](https://onlyfossorg.github.io/) • [Community](https://github.com/onlyfossorg) • [Report Bug](https://github.com/onlyfossorg/onlyfossorg.github.io/issues)
 
 ---
 
 ## 🚀 About the Project
 
-VCET FOSS (Free and Open Source Software) is a community of student developers at Vidyavardhini's College of Engineering and Technology. We are dedicated to solving real campus problems and fostering a culture of collaboration and open-source contribution.
+ONLY FOSS ORG is an independent community that keeps old college projects alive by open-sourcing them and letting other people contribute. We also run small competitions and hackathons so students stay engaged.
 
-This repository contains the source code for the official VCET FOSS website.
+This repository contains the source code for the official ONLY FOSS ORG website.
 
 ## 🛠️ Tech Stack
 
@@ -34,13 +34,13 @@ This repository contains the source code for the official VCET FOSS website.
 1. Clone the repository:
 
    ```bash
-   git clone https://github.com/vcet-foss/vcet-foss.github.io.git
+   git clone https://github.com/onlyfossorg/onlyfossorg.github.io.git
    ```
 
 2. Install dependencies:
 
    ```bash
-   cd vcet-foss.github.io
+   cd onlyfossorg.github.io
    npm install
    ```
 
@@ -67,4 +67,4 @@ Contributions are what make the open-source community such an amazing place to l
 
 ---
 
-Made with 💚 by VCET FOSS Community
+Made with 💚 by ONLY FOSS ORG

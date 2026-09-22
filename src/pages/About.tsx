@@ -17,13 +17,13 @@ const VALUES = [
     Icon: Target,
     idx: "01",
     title: "Our Mission",
-    body: "To bridge the gap between academic learning and industry standards by building real-world software together.",
+    body: "To keep old college projects alive as open source and help students contribute, compete, and ship together.",
   },
   {
     Icon: Code2,
     idx: "02",
     title: "What We Do",
-    body: "We host hackathons, conduct workshops, and maintain open-source repositories for college utilities.",
+    body: "We open-source old college projects, welcome contributors, and run small competitions and hackathons.",
   },
   {
     Icon: Heart,
@@ -129,7 +129,7 @@ const About: React.FC = () => (
         <div className="mb-16 relative pb-8">
           <div className="pg-hline" />
           <RevealOnScroll>
-            <p className="pg-eyebrow">VCET FOSS</p>
+            <p className="pg-eyebrow">ONLY FOSS ORG</p>
             <h1
               className="font-display font-bold text-white jersey-25-regular mb-5"
               style={{
@@ -138,7 +138,7 @@ const About: React.FC = () => (
                 letterSpacing: "0.02em",
               }}
             >
-              <GlitchText text="About VCET FOSS" speed={40} />
+              <GlitchText text="About ONLY FOSS ORG" speed={40} />
             </h1>
             <p
               className="text-gray-400 font-mono text-base leading-relaxed"
@@ -147,9 +147,9 @@ const About: React.FC = () => (
                 paddingLeft: "1rem",
               }}
             >
-              A student-run initiative dedicated to fostering a culture of
-              innovation and open-source contribution at Vidyavardhini's College
-              of Engineering and Technology.
+              An independent community that open-sources old college projects
+              and runs small competitions and hackathons so students stay
+              engaged.
             </p>
           </RevealOnScroll>
         </div>

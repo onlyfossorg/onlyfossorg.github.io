@@ -2,10 +2,10 @@ import React, { useState, useEffect } from "react";
 import { Menu, X, Star, Github } from "lucide-react";
 import type { Tab } from "../utils/types";
 import Button from "./Button";
-import Logo from "../assets/vcet-foss-light.svg";
+import Logo from "../assets/only-foss-light.svg";
 import { NavLink, useLocation } from "react-router-dom";
 
-const GITHUB_ORG = "vcet-foss";
+const GITHUB_ORG = "onlyfossorg";
 const GITHUB_URL = `https://github.com/${GITHUB_ORG}`;
 
 const Navigation: React.FC = () => {
@@ -70,7 +70,7 @@ const Navigation: React.FC = () => {
           >
             <img
               src={Logo}
-              alt="VCET FOSS Logo"
+              alt="ONLY FOSS ORG Logo"
               className="h-8 md:h-10 w-auto"
             />
           </NavLink>

@@ -240,7 +240,7 @@ const Projects: React.FC = () => {
             <div className="projects-header-line" />
 
             <RevealOnScroll>
-              <p className="proj-eyebrow">VCET FOSS</p>
+              <p className="proj-eyebrow">ONLY FOSS ORG</p>
               <h1
                 className="font-display font-bold text-white mb-4 jersey-25-regular"
                 style={{
@@ -258,7 +258,7 @@ const Projects: React.FC = () => {
                   paddingLeft: "1rem",
                 }}
               >
-                Open-source initiatives built by VCET students.
+                Open-source college projects kept alive by the community.
                 <br />
                 Contribute code, design, or ideas.
               </p>

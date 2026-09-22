@@ -145,7 +145,7 @@ const ProjectGuidelines: React.FC = () => (
         <div className="mb-14 relative pb-8">
           <div className="pg-hline" />
           <RevealOnScroll>
-            <p className="pg-eyebrow">VCET FOSS</p>
+            <p className="pg-eyebrow">ONLY FOSS ORG</p>
             <h1
               className="font-display font-bold text-white jersey-25-regular mb-5"
               style={{
@@ -164,7 +164,7 @@ const ProjectGuidelines: React.FC = () => (
                 paddingLeft: "1rem",
               }}
             >
-              Best practices and standards for VCET FOSS projects. Follow these
+              Best practices and standards for ONLY FOSS ORG projects. Follow these
               to maintain quality and consistency.
             </p>
           </RevealOnScroll>

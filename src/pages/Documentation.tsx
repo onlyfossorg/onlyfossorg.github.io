@@ -28,7 +28,7 @@ const DOC_SECTIONS: DocSection[] = [
     title: "Getting Started",
     icon: <Book className="w-5 h-5" />,
     description:
-      "New to open source or VCET FOSS? Start here to learn the basics.",
+      "New to open source or ONLY FOSS ORG? Start here to learn the basics.",
     links: [
       {
         label: "What is Open Source?",
@@ -38,7 +38,7 @@ const DOC_SECTIONS: DocSection[] = [
       { label: "How to Contribute", url: "/community" },
       {
         label: "Finding Your First Issue",
-        url: "https://github.com/vcet-foss",
+        url: "https://github.com/onlyfossorg",
         external: true,
       },
       {
@@ -71,8 +71,8 @@ const DOC_SECTIONS: DocSection[] = [
         external: true,
       },
       {
-        label: "VCET FOSS GitHub Org",
-        url: "https://github.com/vcet-foss",
+        label: "ONLY FOSS ORG GitHub Org",
+        url: "https://github.com/onlyfossorg",
         external: true,
       },
     ],
@@ -88,12 +88,12 @@ const DOC_SECTIONS: DocSection[] = [
       { label: "Code of Conduct", url: "/code-of-conduct" },
       {
         label: "awesome-foss Contributing Guide",
-        url: "https://github.com/vcet-foss/awesome-foss/blob/main/CONTRIBUTING.md",
+        url: "https://github.com/onlyfossorg/awesome-foss/blob/main/CONTRIBUTING.md",
         external: true,
       },
       {
         label: "Issue Templates",
-        url: "https://github.com/vcet-foss",
+        url: "https://github.com/onlyfossorg",
         external: true,
       },
     ],
@@ -214,7 +214,7 @@ const Documentation: React.FC = () => (
         <div className="mb-14 relative pb-8">
           <div className="pg-hline" />
           <RevealOnScroll>
-            <p className="pg-eyebrow">VCET FOSS</p>
+            <p className="pg-eyebrow">ONLY FOSS ORG</p>
             <h1
               className="font-display font-bold text-white jersey-25-regular mb-5"
               style={{
@@ -233,7 +233,7 @@ const Documentation: React.FC = () => (
                 paddingLeft: "1rem",
               }}
             >
-              Everything you need to get started with VCET FOSS. From basics to
+              Everything you need to get started with ONLY FOSS ORG. From basics to
               advanced workflows.
             </p>
           </RevealOnScroll>
@@ -432,7 +432,7 @@ const Documentation: React.FC = () => (
                 Join Discord
               </a>
               <a
-                href="mailto:vcetopensource@gmail.com"
+                href="mailto:onlyfoss.org@gmail.com"
                 className="inline-flex items-center justify-center gap-2 px-6 py-3 border border-white/10 text-white font-mono text-sm hover:border-foss-green/40 transition-colors"
               >
                 Email Us
