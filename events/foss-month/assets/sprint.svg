@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="420" viewBox="0 0 960 420" role="img" aria-label="Contribution sprint">
+  <defs>
+    <radialGradient id="g" cx="50%" cy="40%" r="60%">
+      <stop offset="0%" stop-color="#00ff7f" stop-opacity="0.16"/>
+      <stop offset="100%" stop-color="#000" stop-opacity="0"/>
+    </radialGradient>
+    <pattern id="g2" width="32" height="32" patternUnits="userSpaceOnUse">
+      <path d="M32 0H0V32" fill="none" stroke="#00ff7f" stroke-opacity="0.07"/>
+    </pattern>
+  </defs>
+  <rect width="960" height="420" fill="#070a08"/>
+  <rect width="960" height="420" fill="url(#g2)"/>
+  <rect width="960" height="420" fill="url(#g)"/>
+  <rect x="16" y="16" width="928" height="388" fill="none" stroke="#00ff7f" stroke-opacity="0.2"/>
+  <text x="48" y="80" fill="#00ff7f" fill-opacity="0.5" font-family="ui-monospace, monospace" font-size="13" letter-spacing="3">WEEK 2-3</text>
+  <text x="48" y="150" fill="#fff" font-family="ui-monospace, monospace" font-size="42" font-weight="700">CONTRIBUTION SPRINT</text>
+  <text x="48" y="200" fill="#9ca3af" font-family="ui-monospace, monospace" font-size="16">Issues / pull requests / reviews / merge</text>
+  <rect x="48" y="250" width="180" height="8" fill="#00ff7f" fill-opacity="0.85"/>
+  <rect x="240" y="250" width="90" height="8" fill="#00ff7f" fill-opacity="0.35"/>
+  <rect x="344" y="250" width="48" height="8" fill="#00ff7f" fill-opacity="0.18"/>
+</svg>

@@ -15,7 +15,11 @@ const Navigation: React.FC = () => {
   const [starCount, setStarCount] = useState<number | null>(null);
 
   const activeTab =
-    location.pathname === "/" ? "home" : location.pathname.slice(1);
+    location.pathname === "/"
+      ? "home"
+      : location.pathname.startsWith("/events")
+        ? "events"
+        : location.pathname.slice(1).split("/")[0];
 
   useEffect(() => {
     const handleScroll = () => {
@@ -49,6 +53,7 @@ const Navigation: React.FC = () => {
   const navItems: { id: Tab; label: string }[] = [
     { id: "home", label: "Home" },
     { id: "projects", label: "Projects" },
+    { id: "events", label: "Events" },
     { id: "community", label: "Community" },
     { id: "about", label: "About" },
   ];

@@ -8,6 +8,7 @@ import Community from "./pages/Community";
 import About from "./pages/About";
 import CodeOfConduct from "./pages/CodeOfConduct";
 import Events from "./pages/Events";
+import EventDetail from "./pages/EventDetail";
 import Hackathons from "./pages/Hackathons";
 import Documentation from "./pages/Documentation";
 import ProjectGuidelines from "./pages/ProjectGuidelines";
@@ -29,6 +30,7 @@ function PageContent() {
       <Route path="/about" element={<About />} />
       <Route path="/code-of-conduct" element={<CodeOfConduct />} />
       <Route path="/events" element={<Events />} />
+      <Route path="/events/:slug" element={<EventDetail />} />
       <Route path="/hackathons" element={<Hackathons />} />
       <Route path="/documentation" element={<Documentation />} />
       <Route path="/project-guidelines" element={<ProjectGuidelines />} />

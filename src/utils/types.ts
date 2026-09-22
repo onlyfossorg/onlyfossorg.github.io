@@ -24,4 +24,4 @@ export interface NavItem {
   href: string; // Using hash routing logic
 }
 
-export type Tab = "home" | "projects" | "community" | "about";
+export type Tab = "home" | "projects" | "events" | "community" | "about";

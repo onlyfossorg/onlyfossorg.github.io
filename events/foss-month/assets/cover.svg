@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="720" height="900" viewBox="0 0 720 900" role="img" aria-label="FOSS Month cover">
+  <defs>
+    <radialGradient id="glow" cx="70%" cy="28%" r="55%">
+      <stop offset="0%" stop-color="#00ff7f" stop-opacity="0.22"/>
+      <stop offset="55%" stop-color="#00ff7f" stop-opacity="0.05"/>
+      <stop offset="100%" stop-color="#000" stop-opacity="0"/>
+    </radialGradient>
+    <pattern id="grid" width="36" height="36" patternUnits="userSpaceOnUse">
+      <path d="M36 0H0V36" fill="none" stroke="#00ff7f" stroke-opacity="0.08" stroke-width="1"/>
+    </pattern>
+    <linearGradient id="fade" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#000" stop-opacity="0"/>
+      <stop offset="100%" stop-color="#000" stop-opacity="0.55"/>
+    </linearGradient>
+  </defs>
+  <rect width="720" height="900" fill="#050806"/>
+  <rect width="720" height="900" fill="url(#grid)"/>
+  <rect width="720" height="900" fill="url(#glow)"/>
+  <rect x="28" y="28" width="664" height="844" fill="none" stroke="#00ff7f" stroke-opacity="0.22"/>
+  <path d="M28 52H52V28" fill="none" stroke="#00ff7f" stroke-opacity="0.7" stroke-width="1.5"/>
+  <path d="M668 28H692V52" fill="none" stroke="#00ff7f" stroke-opacity="0.7" stroke-width="1.5"/>
+  <path d="M28 848H52V872" fill="none" stroke="#00ff7f" stroke-opacity="0.7" stroke-width="1.5"/>
+  <path d="M668 872H692V848" fill="none" stroke="#00ff7f" stroke-opacity="0.7" stroke-width="1.5"/>
+  <text x="56" y="120" fill="#00ff7f" fill-opacity="0.55" font-family="ui-monospace, monospace" font-size="16" letter-spacing="4">ONLY FOSS ORG</text>
+  <text x="52" y="280" fill="#ffffff" font-family="ui-monospace, monospace" font-size="72" font-weight="700">FOSS</text>
+  <text x="52" y="360" fill="#00ff7f" font-family="ui-monospace, monospace" font-size="72" font-weight="700">MONTH</text>
+  <text x="56" y="420" fill="#9ca3af" font-family="ui-monospace, monospace" font-size="18">APR 2026 / ONLINE</text>
+  <rect width="720" height="220" y="680" fill="url(#fade)"/>
+  <text x="56" y="800" fill="#e5e7eb" font-family="ui-monospace, monospace" font-size="15">List projects. Ship PRs.</text>
+  <text x="56" y="828" fill="#6b7280" font-family="ui-monospace, monospace" font-size="13">A month-long contribution sprint</text>
+</svg>

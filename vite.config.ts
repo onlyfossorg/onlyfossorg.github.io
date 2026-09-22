@@ -48,4 +48,8 @@ export default defineConfig({
     }),
   ],
   base: "/",
+  build: {
+    // Keep event covers / mid-content images as files so markdown <img src> is not a data: URL
+    assetsInlineLimit: 0,
+  },
 });
