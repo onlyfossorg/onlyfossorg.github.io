@@ -224,19 +224,17 @@ function EventDetail() {
 
               {/* Cover or date/format panel — fixed aspect so missing cover does not jump */}
               <div
-                className="relative overflow-hidden w-full aspect-[4/5] flex flex-col justify-end"
-                style={{
-                  border: "1px solid rgba(0,255,127,.18)",
-                  background: meta.cover
-                    ? "#0a0a0a"
-                    : "linear-gradient(160deg, rgba(0,255,127,.08) 0%, rgba(255,255,255,.02) 45%, #000 100%)",
-                }}
+                className="relative overflow-hidden w-full aspect-square flex flex-col justify-end"
               >
                 {meta.cover ? (
                   <img
                     src={meta.cover}
                     alt=""
-                    className="absolute inset-0 w-full h-full object-cover"
+                    width={720}
+                    height={900}
+                    decoding="async"
+                    fetchPriority="high"
+                    className="absolute inset-0 w-full h-full object-cover object-center"
                   />
                 ) : (
                   <div className="relative z-10 p-6">
@@ -259,28 +257,6 @@ function EventDetail() {
                     )}
                   </div>
                 )}
-                <span
-                  style={{
-                    position: "absolute",
-                    top: 0,
-                    left: 0,
-                    width: 14,
-                    height: 14,
-                    borderTop: "1px solid rgba(0,255,127,.5)",
-                    borderLeft: "1px solid rgba(0,255,127,.5)",
-                  }}
-                />
-                <span
-                  style={{
-                    position: "absolute",
-                    bottom: 0,
-                    right: 0,
-                    width: 14,
-                    height: 14,
-                    borderBottom: "1px solid rgba(0,255,127,.5)",
-                    borderRight: "1px solid rgba(0,255,127,.5)",
-                  }}
-                />
               </div>
             </div>
           </RevealOnScroll>
@@ -294,13 +270,13 @@ function EventDetail() {
                 <RevealOnScroll key={section.id} delay={Math.min(i * 40, 200)}>
                   <section id={section.id} className="ev-section">
                     <h2
-                      className="jersey-25-regular text-white mb-6"
+                      className="jersey-25-regular text-white my-3"
                       style={{
                         fontSize: "clamp(1.5rem,3vw,2rem)",
                         letterSpacing: "0.04em",
                       }}
                     >
-                      {section.title}
+                     <span className="text-foss-green">#</span> {section.title}
                     </h2>
                     {renderSection(section)}
                   </section>

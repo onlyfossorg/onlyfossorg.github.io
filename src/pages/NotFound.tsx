@@ -60,7 +60,6 @@ const NotFound: React.FC = () => (
     `}</style>
 
     <div className="min-h-screen bg-black flex items-center justify-center px-6 relative overflow-hidden">
-      {/* animated grid */}
       <div className="absolute inset-0 pointer-events-none overflow-hidden">
         <div className="nf-grid absolute inset-0" />
         <div
@@ -73,7 +72,6 @@ const NotFound: React.FC = () => (
         />
       </div>
 
-      {/* ambient glow */}
       <div
         style={{
           position: "absolute",
@@ -88,7 +86,6 @@ const NotFound: React.FC = () => (
       />
 
       <div className="relative z-10 max-w-3xl w-full text-center">
-        {/* badge */}
         <div
           style={{
             display: "inline-flex",
@@ -117,7 +114,6 @@ const NotFound: React.FC = () => (
           ERROR 404 · PAGE NOT FOUND
         </div>
 
-        {/* 404 */}
         <div
           style={{
             fontFamily: '"Jersey 25",monospace',
@@ -139,7 +135,6 @@ const NotFound: React.FC = () => (
           </span>
         </div>
 
-        {/* heading */}
         <h2
           style={{
             fontFamily: '"Jersey 25",monospace',
@@ -152,9 +147,8 @@ const NotFound: React.FC = () => (
           Lost in the Void?
         </h2>
 
-        {/* subtext */}
         <p
-          className="text-gray-500 font-mono text-sm leading-relaxed mb-10 max-w-lg mx-auto"
+          className="text-gray-500 font-mono text-sm leading-relaxed mb-4 max-w-lg mx-auto"
           style={{
             borderLeft: "2px solid rgba(0,255,127,.18)",
             paddingLeft: "1rem",
@@ -162,11 +156,29 @@ const NotFound: React.FC = () => (
           }}
         >
           Looks like this page took a detour through{" "}
-          <code style={{ color: "rgba(0,255,127,.65)" }}>/dev/null</code>. Don't
-          worry — even the best developers encounter 404s.
+          <NavLink
+            to="/dev/null"
+            style={{ color: "rgba(0,255,127,.75)", textDecoration: "underline" }}
+          >
+            /dev/null
+          </NavLink>
+          . Don't worry — even the best developers encounter 404s.
         </p>
 
-        {/* action buttons */}
+        <p
+          className="font-mono mb-10"
+          style={{
+            fontSize: ".72rem",
+            letterSpacing: ".06em",
+            color: "rgba(255,255,255,.28)",
+          }}
+        >
+          hint: lost bits still play at{" "}
+          <NavLink to="/dev/null" style={{ color: "rgba(0,255,127,.45)" }}>
+            /dev/null
+          </NavLink>
+        </p>
+
         <div className="flex flex-col sm:flex-row gap-3 justify-center">
           <NavLink to="/">
             <button className="nf-btn-primary">

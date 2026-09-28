@@ -1,3 +1,4 @@
+import { memo } from "react";
 import type { Components } from "react-markdown";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
@@ -50,6 +51,8 @@ const components: Components = {
     <img
       src={src}
       alt={alt ?? ""}
+      loading="lazy"
+      decoding="async"
       className="block w-full max-w-full h-auto object-cover my-6 border border-white/10"
     />
   ),
@@ -93,4 +96,4 @@ function MarkdownBody({ content, className = "" }: MarkdownBodyProps) {
   );
 }
 
-export default MarkdownBody;
+export default memo(MarkdownBody);

@@ -22,10 +22,16 @@ const Navigation: React.FC = () => {
         : location.pathname.slice(1).split("/")[0];
 
   useEffect(() => {
+    let ticking = false;
     const handleScroll = () => {
-      setIsScrolled(window.scrollY > 20);
+      if (ticking) return;
+      ticking = true;
+      requestAnimationFrame(() => {
+        setIsScrolled(window.scrollY > 20);
+        ticking = false;
+      });
     };
-    window.addEventListener("scroll", handleScroll);
+    window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
@@ -62,7 +68,7 @@ const Navigation: React.FC = () => {
     <nav
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 border-b ${
         isScrolled
-          ? "bg-black/80 backdrop-blur-md border-white/10 py-4"
+          ? "bg-black/92 border-white/10 py-4"
           : "bg-transparent border-transparent py-6"
       }`}
     >
@@ -76,6 +82,9 @@ const Navigation: React.FC = () => {
             <img
               src={Logo}
               alt="ONLY FOSS ORG Logo"
+              width={160}
+              height={40}
+              decoding="async"
               className="h-8 md:h-10 w-auto"
             />
           </NavLink>

@@ -51,8 +51,8 @@ const CHANNELS = [
   {
     Icon: Users,
     idx: "03",
-    title: "Weekly Meetups",
-    body: "We meet every Friday at 4 PM in the Lab. Code reviews, tech talks, and pizza.",
+    title: "Open Sessions",
+    body: "Hop into Discord for code reviews, project help, and short talks. Builders, indie hackers, and beginners are welcome.",
     link: null,
     linkLabel: null,
     bg: "rgba(236,72,153,.12)",
