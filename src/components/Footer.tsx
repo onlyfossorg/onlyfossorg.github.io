@@ -2,6 +2,7 @@ import React from "react";
 import {
   Github,
   Mail,
+  Linkedin,
   ArrowUpRight,
   Terminal,
   ExternalLink,
@@ -273,6 +274,15 @@ const Footer: React.FC = () => {
                     aria-label="GitHub"
                   >
                     <Github className="w-4 h-4" />
+                  </a>
+                  <a
+                    href="https://www.linkedin.com/company/onlyfossorg"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="social-btn"
+                    aria-label="LinkedIn"
+                  >
+                    <Linkedin className="w-4 h-4" />
                   </a>
                   <a
                     href="https://discord.gg/CXNustDut3"

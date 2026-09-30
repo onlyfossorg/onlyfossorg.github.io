@@ -1,8 +1,22 @@
+import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
-import { Calendar, MapPin, Monitor, ArrowUpRight, Users } from "lucide-react";
+import {
+  Calendar,
+  MapPin,
+  Monitor,
+  ArrowUpRight,
+  Users,
+  Clock,
+  Trophy,
+} from "lucide-react";
 import {
   getEventBySlug,
+  getEventStatus,
   formatEventDateRange,
+  formatEventCountdown,
+  getUserTimezone,
+  formatTimezoneOffset,
+  isSameTimezone,
   type EventSection,
 } from "../lib/loadEvents";
 import RevealOnScroll from "../components/RevealOnScroll";
@@ -11,12 +25,6 @@ import SectionCards from "../components/events/SectionCards";
 import FaqAccordion from "../components/events/FaqAccordion";
 import EventSectionNav from "../components/events/EventSectionNav";
 import NotFound from "./NotFound";
-
-function statusLabel(status: string): string {
-  if (status === "live") return "LIVE";
-  if (status === "past") return "PAST";
-  return "UPCOMING";
-}
 
 function renderSection(section: EventSection) {
   if (section.kind === "cards" && section.cards) {
@@ -33,13 +41,39 @@ function renderSection(section: EventSection) {
 
 function EventDetail() {
   const { slug } = useParams<{ slug: string }>();
-  const event = slug ? getEventBySlug(slug) : undefined;
+  const [now, setNow] = useState<Date>(() => new Date());
+  const [userTz, setUserTz] = useState<string>(() => getUserTimezone());
+  const [viewInUserTz, setViewInUserTz] = useState(false);
+
+  const event = slug ? getEventBySlug(slug, now) : undefined;
+
+  useEffect(() => {
+    setUserTz(getUserTimezone());
+    const interval = setInterval(() => {
+      setNow(new Date());
+    }, 15000); // 15 seconds
+    return () => clearInterval(interval);
+  }, []);
 
   if (!event) return <NotFound />;
 
   const { meta, sections } = event;
-  const dateRange = formatEventDateRange(meta.start, meta.end, meta.timezone);
-  const isPast = meta.status === "past";
+  const currentStatus = getEventStatus(meta, now);
+  const countdown = formatEventCountdown(meta, now);
+
+  const isSameTz = isSameTimezone(meta.timezone, userTz);
+  const activeTz = viewInUserTz && !isSameTz ? userTz : (meta.timezone || "UTC");
+  const displayedDateRange = formatEventDateRange(
+    meta.start,
+    meta.end,
+    meta.timezone,
+    activeTz,
+    true,
+  );
+
+  const isPast = currentStatus === "past";
+  const isLive = currentStatus === "live";
+  const userTzOffset = formatTimezoneOffset(userTz, now);
 
   return (
     <>
@@ -86,6 +120,19 @@ function EventDetail() {
         .feature-card:hover {
           animation: feature-card-glitch 0.6s cubic-bezier(.19,1,.22,1) forwards;
         }
+        @keyframes live-pulse {
+          0%, 100% { opacity: 1; transform: scale(1); }
+          50% { opacity: 0.4; transform: scale(1.2); }
+        }
+        .live-dot {
+          display: inline-block;
+          width: 8px;
+          height: 8px;
+          border-radius: 50%;
+          background-color: #00ff7f;
+          box-shadow: 0 0 8px #00ff7f;
+          animation: live-pulse 1.8s ease-in-out infinite;
+        }
       `}</style>
 
       <div className="pt-28 pb-24 min-h-screen bg-black relative">
@@ -104,7 +151,7 @@ function EventDetail() {
         <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-8">
           {/* HERO */}
           <RevealOnScroll>
-            <div className="grid lg:grid-cols-[1fr_minmax(240px,340px)] gap-10 lg:gap-14 mb-16 items-start">
+            <div className="grid lg:grid-cols-[1fr_minmax(240px,360px)] gap-10 lg:gap-14 mb-14 items-start">
               <div>
                 {/* Host chip */}
                 {meta.hosts.length > 0 && (
@@ -129,28 +176,38 @@ function EventDetail() {
                   </div>
                 )}
 
+                {/* Status Badges with Dynamic Calculation */}
                 <div className="flex flex-wrap items-center gap-3 mb-4">
                   <span
-                    className="font-mono text-[0.65rem] tracking-[0.18em] px-2.5 py-1 border"
+                    className="inline-flex items-center gap-2 font-mono text-[0.65rem] tracking-[0.18em] px-2.5 py-1 border transition-colors"
                     style={{
-                      color:
-                        meta.status === "live"
-                          ? "#00ff7f"
-                          : meta.status === "past"
-                            ? "rgba(255,255,255,.4)"
-                            : "rgba(0,255,127,.75)",
-                      borderColor:
-                        meta.status === "past"
-                          ? "rgba(255,255,255,.12)"
-                          : "rgba(0,255,127,.25)",
-                      background:
-                        meta.status === "past"
+                      color: isLive
+                        ? "#00ff7f"
+                        : isPast
+                          ? "rgba(255,255,255,.45)"
+                          : "rgba(0,255,127,.85)",
+                      borderColor: isLive
+                        ? "rgba(0,255,127,.5)"
+                        : isPast
+                          ? "rgba(255,255,255,.15)"
+                          : "rgba(0,255,127,.28)",
+                      background: isLive
+                        ? "rgba(0,255,127,.12)"
+                        : isPast
                           ? "transparent"
                           : "rgba(0,255,127,.05)",
                     }}
                   >
-                    {statusLabel(meta.status)}
+                    {isLive && <span className="live-dot" />}
+                    {countdown.label}
                   </span>
+
+                  {/* Countdown ticker text */}
+                  <span className="inline-flex items-center gap-1.5 font-mono text-xs text-gray-300 px-2 py-0.5 border border-white/10 bg-white/[0.02]">
+                    <Clock className="w-3 h-3 text-foss-green" />
+                    {countdown.text}
+                  </span>
+
                   {meta.format && (
                     <span className="font-mono text-xs text-gray-500 tracking-wide">
                       {meta.format}
@@ -175,24 +232,51 @@ function EventDetail() {
                   </p>
                 )}
 
+                {/* Key metadata including timezone sync */}
                 <div className="flex flex-col gap-2.5 mb-8 text-gray-400 font-mono text-sm">
-                  {dateRange && (
-                    <span className="inline-flex items-center gap-2">
-                      <Calendar className="w-4 h-4 text-foss-green/70 shrink-0" />
-                      {dateRange}
-                      {meta.timezone ? (
-                        <span className="text-gray-600 text-xs">
-                          ({meta.timezone})
+                  {displayedDateRange && (
+                    <div className="space-y-1.5">
+                      <div className="inline-flex flex-wrap items-center gap-2 text-white">
+                        <Calendar className="w-4 h-4 text-foss-green/70 shrink-0" />
+                        <span>{displayedDateRange}</span>
+                        <span className="text-gray-500 text-xs">
+                          ({activeTz}
+                          {activeTz === userTz && userTzOffset ? ` · ${userTzOffset}` : ""})
                         </span>
-                      ) : null}
-                    </span>
+                      </div>
+                      {!isSameTz && meta.timezone && (
+                        <div className="pl-6">
+                          <button
+                            type="button"
+                            onClick={() => setViewInUserTz((prev) => !prev)}
+                            className="text-xs text-foss-green/90 hover:text-foss-green underline underline-offset-4 cursor-pointer inline-flex items-center gap-1.5 font-mono transition-colors"
+                          >
+                            <span className="text-foss-green">⇄</span>
+                            <span>
+                              {viewInUserTz
+                                ? `Switch back to event time.`
+                                : `View in your time.`}
+                            </span>
+                          </button>
+                        </div>
+                      )}
+                    </div>
                   )}
+
                   {meta.location && (
                     <span className="inline-flex items-center gap-2">
                       <MapPin className="w-4 h-4 text-foss-green/70 shrink-0" />
                       {meta.location}
                     </span>
                   )}
+
+                  {meta.prizes && (
+                    <span className="inline-flex items-center gap-2 text-foss-green/90">
+                      <Trophy className="w-4 h-4 text-foss-green shrink-0" />
+                      {meta.prizes}
+                    </span>
+                  )}
+
                   {meta.format && (
                     <span className="inline-flex items-center gap-2 lg:hidden">
                       <Monitor className="w-4 h-4 text-foss-green/70 shrink-0" />
@@ -214,7 +298,7 @@ function EventDetail() {
                         ? "noopener noreferrer"
                         : undefined
                     }
-                    className="inline-flex items-center gap-2 px-6 py-3 bg-foss-green text-black font-mono text-sm font-bold hover:bg-foss-green/90 transition-colors"
+                    className="inline-flex items-center gap-2 px-6 py-3 bg-foss-green text-black font-mono text-sm font-bold hover:bg-foss-green/90 transition-colors shadow-[0_0_20px_rgba(0,255,127,0.25)]"
                   >
                     {meta.register.label}
                     <ArrowUpRight className="w-4 h-4" />
@@ -222,14 +306,12 @@ function EventDetail() {
                 )}
               </div>
 
-              {/* Cover or date/format panel — fixed aspect so missing cover does not jump */}
-              <div
-                className="relative overflow-hidden w-full aspect-square flex flex-col justify-end"
-              >
+              {/* Cover or date/format panel */}
+              <div className="relative overflow-hidden w-full aspect-square flex flex-col justify-end bg-black/80">
                 {meta.cover ? (
                   <img
                     src={meta.cover}
-                    alt=""
+                    alt={meta.title}
                     width={720}
                     height={900}
                     decoding="async"
@@ -243,7 +325,7 @@ function EventDetail() {
                       className="jersey-25-regular text-white mb-2"
                       style={{ fontSize: "1.6rem", letterSpacing: "0.04em" }}
                     >
-                      {dateRange || "Dates TBA"}
+                      {displayedDateRange || "Dates TBA"}
                     </p>
                     {meta.format && (
                       <p className="font-mono text-xs text-foss-green/70 tracking-wider uppercase">
@@ -276,7 +358,7 @@ function EventDetail() {
                         letterSpacing: "0.04em",
                       }}
                     >
-                     <span className="text-foss-green">#</span> {section.title}
+                      <span className="text-foss-green">#</span> {section.title}
                     </h2>
                     {renderSection(section)}
                   </section>

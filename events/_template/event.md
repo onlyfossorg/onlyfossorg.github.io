@@ -2,6 +2,7 @@
 title: Event title
 summary: One-line summary for the events index card.
 status: upcoming
+type: event # "event" | "hackathon"
 start: "2026-01-01"
 end: "2026-01-31"
 timezone: Asia/Kolkata
@@ -13,8 +14,10 @@ register:
   label: Register
   url: https://example.com
 # Images: put files in this event's assets/ folder (events/<slug>/assets/).
-# Cover (Luma-style hero on the right): set the path below, then drop the file in assets/.
-# cover: ./assets/cover.png
+# Cover (square hero on the right of the detail page):
+# cover: ./assets/cover.svg
+# Banner (4:1 wide banner for main cards):
+# banner: ./assets/banner.svg
 # Mid-content images: embed in any markdown section with:
 # ![Short description](./assets/filename.ext)
 ---

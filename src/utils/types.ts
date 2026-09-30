@@ -3,7 +3,19 @@ export interface Maintainer {
   contact: string;
 }
 
-export type Domain = "Web" | "AI/ML" | "GenAI" | "Blockchain" | "IoT/Embedded";
+export type Domain =
+  | "Web"
+  | "AI/ML"
+  | "GenAI"
+  | "Tools"
+  | "IoT/Embedded"
+  | "Blockchain"
+  | "Mobile"
+  | "Cybersecurity"
+  | "Cloud/DevOps"
+  | "Data/Analytics"
+  | "Game Dev"
+  | "Systems";
 
 export interface Project {
   slug: string;

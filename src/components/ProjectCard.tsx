@@ -13,6 +13,13 @@ const domainColors: Record<string, string> = {
   GenAI: "text-pink-400 bg-pink-400/10 border-pink-400/30",
   Blockchain: "text-orange-400 bg-orange-400/10 border-orange-400/30",
   "IoT/Embedded": "text-teal-400 bg-teal-400/10 border-teal-400/30",
+  Tools: "text-amber-400 bg-amber-400/10 border-amber-400/30",
+  Mobile: "text-emerald-400 bg-emerald-400/10 border-emerald-400/30",
+  Cybersecurity: "text-red-400 bg-red-400/10 border-red-400/30",
+  "Cloud/DevOps": "text-cyan-400 bg-cyan-400/10 border-cyan-400/30",
+  "Data/Analytics": "text-indigo-400 bg-indigo-400/10 border-indigo-400/30",
+  "Game Dev": "text-violet-400 bg-violet-400/10 border-violet-400/30",
+  Systems: "text-lime-400 bg-lime-400/10 border-lime-400/30",
 };
 
 const ProjectCard: React.FC<ProjectCardProps> = ({ project }) => {

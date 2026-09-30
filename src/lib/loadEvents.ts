@@ -5,6 +5,7 @@ import matter from "gray-matter";
 (globalThis as unknown as { Buffer: typeof Buffer }).Buffer = Buffer;
 
 export type EventStatus = "upcoming" | "live" | "past";
+export type EventType = "event" | "hackathon";
 
 export interface EventHost {
   name: string;
@@ -14,6 +15,12 @@ export interface EventHost {
 export interface EventRegister {
   label: string;
   url: string;
+}
+
+export interface EventTimelineItem {
+  label: string;
+  date: string;
+  description?: string;
 }
 
 export interface EventMeta {
@@ -26,9 +33,13 @@ export interface EventMeta {
   timezone?: string;
   format?: string;
   location?: string;
+  type: EventType;
+  prizes?: string;
   hosts: EventHost[];
   cover?: string;
+  banner?: string;
   register?: EventRegister;
+  timeline?: EventTimelineItem[];
 }
 
 export type EventSectionKind = "markdown" | "cards" | "faq" | "generic";
@@ -64,6 +75,9 @@ const MARKDOWN_HEADINGS = new Set([
   "rules",
   "important notes",
   "contact",
+  "how it works",
+  "how the design hackathon works",
+  "timeline",
 ]);
 
 const CARD_HEADINGS = new Set(["prizes", "rewards", "judges"]);
@@ -267,16 +281,261 @@ function asString(value: unknown): string | undefined {
   return undefined;
 }
 
+/**
+ * Parses a date string taking timezone into account.
+ * Handles ISO strings with offsets (e.g. 2026-11-06T00:00:00-08:00 or Z),
+ * or date-only YYYY-MM-DD or date-time strings without offset interpreted in `timeZone`.
+ */
+export function parseDateTimeInZone(
+  dateStr: string | undefined,
+  isEndOfDay = false,
+  timeZone = "UTC",
+): Date | null {
+  if (!dateStr) return null;
+  const trimmed = dateStr.trim();
+  if (!trimmed) return null;
+
+  // Already has explicit offset or Z: e.g. 2026-11-06T00:00:00-08:00 or 2026-11-06T00:00:00Z
+  if (/T.*\d(Z|[+-]\d{2}(?::?\d{2})?)$/i.test(trimmed)) {
+    const t = Date.parse(trimmed);
+    return Number.isNaN(t) ? null : new Date(t);
+  }
+
+  // Parse YYYY-MM-DD or YYYY-MM-DDTHH:mm:ss
+  const match = trimmed.match(
+    /^(\d{4})-(\d{2})-(\d{2})(?:[T ](\d{2}):(\d{2})(?::(\d{2}))?)?/,
+  );
+  if (!match) {
+    const t = Date.parse(trimmed);
+    return Number.isNaN(t) ? null : new Date(t);
+  }
+
+  const [, y, m, d, hh, mm, ss] = match;
+  const hours = hh !== undefined ? parseInt(hh, 10) : isEndOfDay ? 23 : 0;
+  const minutes = mm !== undefined ? parseInt(mm, 10) : isEndOfDay ? 59 : 0;
+  const seconds = ss !== undefined ? parseInt(ss, 10) : isEndOfDay ? 59 : 0;
+  const ms = isEndOfDay ? 999 : 0;
+
+  const targetUtc = Date.UTC(+y, +m - 1, +d, hours, minutes, seconds, ms);
+  try {
+    const dtf = new Intl.DateTimeFormat("en-US", {
+      timeZone: timeZone || "UTC",
+      year: "numeric",
+      month: "numeric",
+      day: "numeric",
+      hour: "numeric",
+      minute: "numeric",
+      second: "numeric",
+      hourCycle: "h23",
+    });
+
+    const getZoneUtc = (date: Date) => {
+      const parts = dtf.formatToParts(date);
+      const getVal = (type: string) =>
+        parseInt(parts.find((p) => p.type === type)?.value ?? "0", 10);
+      return Date.UTC(
+        getVal("year"),
+        getVal("month") - 1,
+        getVal("day"),
+        getVal("hour"),
+        getVal("minute"),
+        getVal("second"),
+        ms,
+      );
+    };
+
+    let guess = targetUtc;
+    for (let i = 0; i < 2; i++) {
+      const offset = getZoneUtc(new Date(guess)) - targetUtc;
+      guess -= offset;
+    }
+    return new Date(guess);
+  } catch {
+    return new Date(targetUtc);
+  }
+}
+
+/**
+ * Computes dynamic event status ("upcoming" | "live" | "past") based on
+ * start, end, timezone, and current time.
+ */
+export function getEventStatus(
+  meta: Pick<EventMeta, "start" | "end" | "timezone"> & { status?: EventStatus },
+  atTime: Date = new Date(),
+): EventStatus {
+  const startDate = parseDateTimeInZone(meta.start, false, meta.timezone);
+  if (!startDate) return meta.status ?? "upcoming";
+
+  const endDate = meta.end
+    ? parseDateTimeInZone(meta.end, true, meta.timezone)
+    : parseDateTimeInZone(meta.start, true, meta.timezone);
+
+  const nowMs = atTime.getTime();
+  const startMs = startDate.getTime();
+  const endMs = endDate ? endDate.getTime() : startMs + 24 * 60 * 60 * 1000;
+
+  if (nowMs < startMs) {
+    return "upcoming";
+  }
+  if (nowMs <= endMs) {
+    return "live";
+  }
+  return "past";
+}
+
+/**
+ * Get user's detected browser timezone or fallback to UTC
+ */
+export function getUserTimezone(): string {
+  try {
+    return Intl.DateTimeFormat().resolvedOptions().timeZone || "UTC";
+  } catch {
+    return "UTC";
+  }
+}
+
+/**
+ * Get formatted GMT offset string for a timezone, e.g. "GMT+5:30" or "GMT-8"
+ */
+export function formatTimezoneOffset(
+  timeZone: string,
+  date: Date = new Date(),
+): string {
+  try {
+    const formatter = new Intl.DateTimeFormat("en-US", {
+      timeZone,
+      timeZoneName: "shortOffset",
+    });
+    const parts = formatter.formatToParts(date);
+    const tzPart = parts.find((p) => p.type === "timeZoneName");
+    return tzPart ? tzPart.value : "";
+  } catch {
+    try {
+      const formatter = new Intl.DateTimeFormat("en-US", {
+        timeZone,
+        timeZoneName: "short",
+      });
+      const parts = formatter.formatToParts(date);
+      const tzPart = parts.find((p) => p.type === "timeZoneName");
+      return tzPart ? tzPart.value : "";
+    } catch {
+      return "";
+    }
+  }
+}
+
+/**
+ * Format milestone date for a specific timezone
+ */
+export function formatEventMilestone(
+  date: Date | string,
+  timeZone: string,
+): { formatted: string; offset: string; full: string } {
+  const parsed =
+    typeof date === "string"
+      ? parseDateTimeInZone(date, false, timeZone)
+      : date;
+  if (!parsed) return { formatted: "", offset: "", full: "" };
+
+  const formatted = parsed.toLocaleString("en-US", {
+    timeZone,
+    weekday: "short",
+    month: "short",
+    day: "numeric",
+    hour: "numeric",
+    minute: "2-digit",
+    hour12: true,
+  });
+  const offset = formatTimezoneOffset(timeZone, parsed);
+  const full = offset ? `${formatted} ${offset}` : formatted;
+  return { formatted, offset, full };
+}
+
+/**
+ * Format dynamic countdown / state string
+ */
+export function formatEventCountdown(
+  meta: Pick<EventMeta, "start" | "end" | "timezone" | "status">,
+  now: Date = new Date(),
+): { status: EventStatus; label: string; text: string } {
+  const startDate = parseDateTimeInZone(meta.start, false, meta.timezone);
+  const endDate = meta.end
+    ? parseDateTimeInZone(meta.end, true, meta.timezone)
+    : parseDateTimeInZone(meta.start, true, meta.timezone);
+
+  if (!startDate) {
+    const status = meta.status ?? "upcoming";
+    return {
+      status,
+      label: status.toUpperCase(),
+      text:
+        status === "live"
+          ? "Live now"
+          : status === "past"
+            ? "Concluded"
+            : "Upcoming",
+    };
+  }
+
+  const nowMs = now.getTime();
+  const startMs = startDate.getTime();
+  const endMs = endDate ? endDate.getTime() : startMs + 24 * 60 * 60 * 1000;
+
+  const formatDiff = (diffMs: number): string => {
+    const totalSecs = Math.max(0, Math.floor(diffMs / 1000));
+    const days = Math.floor(totalSecs / 86400);
+    const hours = Math.floor((totalSecs % 86400) / 3600);
+    const mins = Math.floor((totalSecs % 3600) / 60);
+
+    if (days > 0) {
+      return `${days}d ${hours}h ${mins}m`;
+    }
+    if (hours > 0) {
+      return `${hours}h ${mins}m`;
+    }
+    return `${mins}m`;
+  };
+
+  if (nowMs < startMs) {
+    return {
+      status: "upcoming",
+      label: "UPCOMING",
+      text: `Starts in ${formatDiff(startMs - nowMs)}`,
+    };
+  }
+  if (nowMs <= endMs) {
+    return {
+      status: "live",
+      label: "LIVE NOW",
+      text: `Live · Submissions close in ${formatDiff(endMs - nowMs)}`,
+    };
+  }
+  return {
+    status: "past",
+    label: "PAST",
+    text: "Event concluded",
+  };
+}
+
 function parseEvent(slug: string, raw: string): EventData | null {
   try {
     const { data, content } = matter(raw);
     const title = asString(data.title) ?? slug;
     const summary = asString(data.summary) ?? "";
+    const start = asString(data.start) ?? "";
+    const end = asString(data.end);
+    const timezone = asString(data.timezone);
     const statusRaw = asString(data.status) ?? "upcoming";
-    const status: EventStatus =
+    const statusInitial: EventStatus =
       statusRaw === "live" || statusRaw === "past" || statusRaw === "upcoming"
         ? statusRaw
         : "upcoming";
+
+    // Dynamic status calculation based on start, end, and timezone
+    const status = getEventStatus(
+      { start, end, timezone, status: statusInitial },
+      new Date(),
+    );
 
     const registerRaw = data.register;
     let register: EventRegister | undefined;
@@ -289,22 +548,51 @@ function parseEvent(slug: string, raw: string): EventData | null {
       }
     }
 
+    const timelineRaw = data.timeline;
+    let timeline: EventTimelineItem[] | undefined;
+    if (Array.isArray(timelineRaw)) {
+      const items: EventTimelineItem[] = [];
+      for (const item of timelineRaw) {
+        if (!item || typeof item !== "object") continue;
+        const obj = item as Record<string, unknown>;
+        const label = asString(obj.label);
+        const date = asString(obj.date);
+        const description = asString(obj.description);
+        if (label && date) {
+          items.push({ label, date, description });
+        }
+      }
+      if (items.length > 0) timeline = items;
+    }
+
+    const typeRaw = asString(data.type)?.toLowerCase();
+    const type: EventType = typeRaw === "hackathon" ? "hackathon" : "event";
+
     const meta: EventMeta = {
       slug,
       title,
       summary,
       status,
-      start: asString(data.start) ?? "",
-      end: asString(data.end),
-      timezone: asString(data.timezone),
+      start,
+      end,
+      timezone,
       format: asString(data.format),
       location: asString(data.location),
+      type,
+      prizes: asString(data.prizes),
       hosts: normalizeHosts(slug, data.hosts),
       cover: (() => {
         const cover = asString(data.cover);
         return cover ? resolveAssetUrl(slug, cover) : undefined;
       })(),
+      banner: (() => {
+        const banner = asString(data.banner);
+        if (banner) return resolveAssetUrl(slug, banner);
+        const cover = asString(data.cover);
+        return cover ? resolveAssetUrl(slug, cover) : undefined;
+      })(),
       register,
+      timeline,
     };
 
     return {
@@ -331,33 +619,85 @@ const allEvents: EventData[] = Object.entries(eventModules)
     return (b.meta.start || "").localeCompare(a.meta.start || "");
   });
 
-export function getAllEvents(): EventData[] {
-  return allEvents;
+export function getAllEvents(atTime: Date = new Date()): EventData[] {
+  return [...allEvents]
+    .map((event) => ({
+      ...event,
+      meta: {
+        ...event.meta,
+        status: getEventStatus(event.meta, atTime),
+      },
+    }))
+    .sort((a, b) => {
+      const order = { live: 0, upcoming: 1, past: 2 };
+      const statusDiff = order[a.meta.status] - order[b.meta.status];
+      if (statusDiff !== 0) return statusDiff;
+      return (b.meta.start || "").localeCompare(a.meta.start || "");
+    });
 }
 
-export function getEventBySlug(slug: string): EventData | undefined {
-  return allEvents.find((e) => e.meta.slug === slug);
+export function getEventBySlug(
+  slug: string,
+  atTime: Date = new Date(),
+): EventData | undefined {
+  const event = allEvents.find((e) => e.meta.slug === slug);
+  if (!event) return undefined;
+  return {
+    ...event,
+    meta: {
+      ...event.meta,
+      status: getEventStatus(event.meta, atTime),
+    },
+  };
+}
+
+export function isSameTimezone(tz1?: string, tz2?: string): boolean {
+  if (!tz1 || !tz2) return false;
+  if (tz1.toLowerCase() === tz2.toLowerCase()) return true;
+  try {
+    const c1 = Intl.DateTimeFormat(undefined, {
+      timeZone: tz1,
+    }).resolvedOptions().timeZone;
+    const c2 = Intl.DateTimeFormat(undefined, {
+      timeZone: tz2,
+    }).resolvedOptions().timeZone;
+    return c1.toLowerCase() === c2.toLowerCase();
+  } catch {
+    return false;
+  }
 }
 
 export function formatEventDateRange(
   start: string,
   end?: string,
   timezone?: string,
+  targetTimezone?: string,
+  includeTime = true,
 ): string {
   if (!start) return "";
+  const tz = targetTimezone || timezone || undefined;
+  const startDate = parseDateTimeInZone(start, false, timezone);
+  if (!startDate) return start;
+
+  const endDate = end ? parseDateTimeInZone(end, true, timezone) : undefined;
+  const hasTime = includeTime && (start.includes("T") || start.includes(":"));
+
   const opts: Intl.DateTimeFormatOptions = {
     month: "short",
     day: "numeric",
     year: "numeric",
-    timeZone: timezone || undefined,
+    timeZone: tz,
+    ...(hasTime
+      ? {
+          hour: "numeric",
+          minute: "2-digit",
+          hour12: true,
+        }
+      : {}),
   };
   try {
-    const startDate = new Date(start);
-    if (Number.isNaN(startDate.getTime())) return start;
     const startStr = startDate.toLocaleDateString("en-US", opts);
-    if (!end) return startStr;
-    const endDate = new Date(end);
-    if (Number.isNaN(endDate.getTime())) return startStr;
+    if (!endDate) return startStr;
     const endStr = endDate.toLocaleDateString("en-US", opts);
     return startStr === endStr ? startStr : `${startStr} – ${endStr}`;
   } catch {

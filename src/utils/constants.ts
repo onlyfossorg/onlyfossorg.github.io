@@ -52,8 +52,15 @@ export const DOMAIN_OPTIONS = [
   "Web",
   "AI/ML",
   "GenAI",
-  "Blockchain",
+  "Tools",
   "IoT/Embedded",
+  "Blockchain",
+  "Mobile",
+  "Cybersecurity",
+  "Cloud/DevOps",
+  "Data/Analytics",
+  "Game Dev",
+  "Systems",
 ] as const;
 
 export const SORT_OPTIONS = [
