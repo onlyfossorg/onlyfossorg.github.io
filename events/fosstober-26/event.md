@@ -2,6 +2,7 @@
 title: FOSStober 2026
 summary: A month-long worldwide contribution event. Maintainers list projects and issues; contributors open pull requests. A live leaderboard ranks closed issues and merged pull requests.
 status: upcoming
+type: event
 start: "2026-10-01"
 end: "2026-10-31"
 timezone: Asia/Kolkata
@@ -10,6 +11,7 @@ location: Online · Worldwide
 hosts:
   - name: ONLY FOSS
 cover: ./assets/cover.svg
+banner: ./assets/banner.svg
 register:
   label: Register
   url: https://forms.gle/qHNMbs5AhBqGZwRv8
