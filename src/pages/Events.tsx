@@ -3,6 +3,7 @@ import RevealOnScroll from "../components/RevealOnScroll";
 import GlitchText from "../components/GlitchText";
 import { getAllEvents } from "../lib/loadEvents";
 import EventCard from "../components/events/EventCard";
+import SEO from "../components/SEO";
 
 function Events() {
   const events = getAllEvents();
@@ -10,6 +11,11 @@ function Events() {
 
   return (
     <>
+      <SEO
+        title="Events & Hackathons"
+        description="Discover upcoming and past open-source events, hackathons, and community workshops hosted by ONLY FOSS ORG."
+        canonical="https://onlyfossorg.github.io/events"
+      />
       <style>{`
         @keyframes grid-drift { 0%{transform:translateY(0)} 100%{transform:translateY(64px)} }
         .hero-grid {

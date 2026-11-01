@@ -10,6 +10,7 @@ import {
 } from "lucide-react";
 import RevealOnScroll from "../components/RevealOnScroll";
 import GlitchText from "../components/GlitchText";
+import SEO from "../components/SEO";
 
 const AVOID = [
   "Committing sensitive information (API keys, passwords, credentials)",
@@ -39,6 +40,11 @@ const COLLAB = [
 
 const ProjectGuidelines: React.FC = () => (
   <>
+    <SEO
+      title="Project Guidelines"
+      description="Best practices, code standards, Git commit conventions, and submission rules for ONLY FOSS ORG open-source projects."
+      canonical="https://onlyfossorg.github.io/project-guidelines"
+    />
     <style>{`
       @keyframes grid-drift { 0%{transform:translateY(0)} 100%{transform:translateY(64px)} }
       .hero-grid {

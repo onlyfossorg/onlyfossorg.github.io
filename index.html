@@ -3,8 +3,68 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link href="/src/index.css" rel="stylesheet" />
+    <title>ONLY FOSS ORG — Open Source Student Developer Community &amp; Hackathons</title>
+    
+    <!-- Primary Meta Tags -->
+    <meta
+      name="title"
+      content="ONLY FOSS ORG — Open Source Student Developer Community &amp; Hackathons"
+    />
+    <meta
+      name="description"
+      content="ONLY FOSS ORG is an independent community that open-sources and incubates student college projects, organizes developer hackathons like FOSStober and Founding Dev Design Hackathon, and empowers builders worldwide."
+    />
+    <meta
+      name="keywords"
+      content="ONLY FOSS, ONLY FOSS ORG, onlyfoss, open source, student developers, college projects, hackathons, FOSStober, open source incubation, coding community, github, FOSS, student hackathons"
+    />
+    <meta name="author" content="ONLY FOSS ORG" />
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
+    <meta name="theme-color" content="#00ff7f" />
+    <meta name="google-site-verification" content="VV0l0rAYRqAj6Ah0GTUZtgotrNIpFDy2ecuUpbp7hgE" />
+    <meta name="google-site-verification" content="amurI-C0ucbe7UpByR2gCWeunvoCEuqyHl7Hfe3sdyU" />
+
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://onlyfossorg.github.io/" />
+
+    <!-- Favicon & Icons -->
     <link rel="icon" href="/of-logo.png" type="image/png" />
+    <link rel="apple-touch-icon" href="/pwa-192.png" />
+    <link rel="manifest" href="/manifest.webmanifest" />
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="ONLY FOSS ORG" />
+    <meta property="og:url" content="https://onlyfossorg.github.io/" />
+    <meta
+      property="og:title"
+      content="ONLY FOSS ORG — Open Source Student Developer Community &amp; Hackathons"
+    />
+    <meta
+      property="og:description"
+      content="An independent community that open-sources student college projects, organizes hackathons, and fosters collaborative open-source engineering."
+    />
+    <meta property="og:image" content="https://onlyfossorg.github.io/pwa-512.png" />
+    <meta property="og:image:width" content="512" />
+    <meta property="og:image:height" content="512" />
+    <meta property="og:image:alt" content="ONLY FOSS ORG Logo" />
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:site" content="@onlyfossorg" />
+    <meta name="twitter:creator" content="@onlyfossorg" />
+    <meta name="twitter:url" content="https://onlyfossorg.github.io/" />
+    <meta
+      name="twitter:title"
+      content="ONLY FOSS ORG — Open Source Student Developer Community &amp; Hackathons"
+    />
+    <meta
+      name="twitter:description"
+      content="An independent community that open-sources student college projects, organizes hackathons, and fosters collaborative open-source engineering."
+    />
+    <meta name="twitter:image" content="https://onlyfossorg.github.io/pwa-512.png" />
+
+    <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -19,10 +79,65 @@
         href="https://fonts.googleapis.com/css2?family=Jersey+25&display=swap"
       />
     </noscript>
-    <title>ONLY FOSS ORG</title>
+
+    <!-- Schema.org JSON-LD Structured Data -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@graph": [
+          {
+            "@type": "Organization",
+            "@id": "https://onlyfossorg.github.io/#organization",
+            "name": "ONLY FOSS ORG",
+            "alternateName": ["ONLY FOSS", "onlyfoss", "OnlyFossOrg"],
+            "url": "https://onlyfossorg.github.io",
+            "logo": {
+              "@type": "ImageObject",
+              "url": "https://onlyfossorg.github.io/pwa-512.png",
+              "width": 512,
+              "height": 512
+            },
+            "description": "An independent open-source community that incubates student college projects and hosts hackathons and competitions.",
+            "sameAs": [
+              "https://github.com/onlyfossorg",
+              "https://www.linkedin.com/company/onlyfossorg",
+              "https://discord.gg/CXNustDut3"
+            ]
+          },
+          {
+            "@type": "WebSite",
+            "@id": "https://onlyfossorg.github.io/#website",
+            "url": "https://onlyfossorg.github.io",
+            "name": "ONLY FOSS ORG",
+            "description": "Open Source Student Developer Community, Hackathons & Project Incubation",
+            "publisher": {
+              "@id": "https://onlyfossorg.github.io/#organization"
+            }
+          }
+        ]
+      }
+    </script>
   </head>
   <body>
-    <div id="root"></div>
+    <div id="root">
+      <!-- Semantic crawlable fallback for search engine bots -->
+      <header style="padding: 20px; font-family: sans-serif;">
+        <h1>ONLY FOSS ORG — Open Source Student Developer Community</h1>
+        <p>An independent community that open-sources old college projects and runs small competitions and hackathons. Stop building alone. Join the movement!</p>
+        <nav aria-label="Main Navigation">
+          <ul>
+            <li><a href="/projects">Explore Open Source Projects</a></li>
+            <li><a href="/events">Events &amp; Hackathons</a></li>
+            <li><a href="/hackathons">Hackathons</a></li>
+            <li><a href="/community">Community</a></li>
+            <li><a href="/about">About ONLY FOSS ORG</a></li>
+            <li><a href="/documentation">Documentation</a></li>
+            <li><a href="/project-guidelines">Project Guidelines</a></li>
+            <li><a href="/code-of-conduct">Code of Conduct</a></li>
+          </ul>
+        </nav>
+      </header>
+    </div>
     <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>

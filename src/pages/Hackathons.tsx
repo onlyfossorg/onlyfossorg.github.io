@@ -4,6 +4,7 @@ import RevealOnScroll from "../components/RevealOnScroll";
 import GlitchText from "../components/GlitchText";
 import { getAllEvents } from "../lib/loadEvents";
 import EventCard from "../components/events/EventCard";
+import SEO from "../components/SEO";
 
 const Hackathons: React.FC = () => {
   const events = getAllEvents();
@@ -16,6 +17,11 @@ const Hackathons: React.FC = () => {
 
   return (
     <>
+      <SEO
+        title="Hackathons"
+        description="Join online developer hackathons hosted by ONLY FOSS ORG. Win cash prizes, build real-world products, and collaborate with student builders."
+        canonical="https://onlyfossorg.github.io/hackathons"
+      />
       <style>{`
         @keyframes grid-drift { 0%{transform:translateY(0)} 100%{transform:translateY(64px)} }
         .hero-grid {

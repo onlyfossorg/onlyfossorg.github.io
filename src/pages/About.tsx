@@ -2,6 +2,7 @@ import React from "react";
 import { Target, Heart, Code2 } from "lucide-react";
 import GlitchText from "../components/GlitchText";
 import RevealOnScroll from "../components/RevealOnScroll";
+import SEO from "../components/SEO";
 
 /* ─── Shared design tokens (same across all pages) ───────────────────
    font-display + jersey-25-regular  → Jersey 25 (big headings)
@@ -35,6 +36,11 @@ const VALUES = [
 
 const About: React.FC = () => (
   <>
+    <SEO
+      title="About Us"
+      description="Learn about ONLY FOSS ORG: an independent open-source organization rescuing and incubating college projects, running student hackathons, and fostering developer collaboration."
+      canonical="https://onlyfossorg.github.io/about"
+    />
     <style>{`
       @keyframes grid-drift { 0%{transform:translateY(0)} 100%{transform:translateY(64px)} }
       .hero-grid {

@@ -1,9 +1,14 @@
 import React from "react";
 import { Home, Github, Code, ArrowUpRight } from "lucide-react";
 import { NavLink } from "react-router-dom";
+import SEO from "../components/SEO";
 
 const NotFound: React.FC = () => (
   <>
+    <SEO
+      title="404 Page Not Found"
+      description="The page you are looking for could not be found. Explore our open source projects and community."
+    />
     <style>{`
       @keyframes grid-drift { 0%{transform:translateY(0)} 100%{transform:translateY(64px)} }
       .nf-grid {

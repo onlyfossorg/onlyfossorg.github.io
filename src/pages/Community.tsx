@@ -3,6 +3,7 @@ import { MessageSquare, Users, Github, ArrowUpRight } from "lucide-react";
 import Button from "../components/Button";
 import RevealOnScroll from "../components/RevealOnScroll";
 import GlitchText from "../components/GlitchText";
+import SEO from "../components/SEO";
 
 const STEPS = [
   {
@@ -62,6 +63,11 @@ const CHANNELS = [
 
 const Community: React.FC = () => (
   <>
+    <SEO
+      title="Join the Community"
+      description="Connect with student developers, designers, and maintainers in ONLY FOSS ORG. Join our Discord, contribute on GitHub, and build together."
+      canonical="https://onlyfossorg.github.io/community"
+    />
     <style>{`
       @keyframes grid-drift { 0%{transform:translateY(0)} 100%{transform:translateY(64px)} }
       .hero-grid {

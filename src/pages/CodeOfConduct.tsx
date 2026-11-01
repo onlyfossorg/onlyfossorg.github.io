@@ -2,6 +2,7 @@ import React from "react";
 import { Shield, Users, AlertTriangle, Mail } from "lucide-react";
 import RevealOnScroll from "../components/RevealOnScroll";
 import GlitchText from "../components/GlitchText";
+import SEO from "../components/SEO";
 
 const ENFORCEMENT = [
   {
@@ -36,6 +37,11 @@ const ENFORCEMENT = [
 
 const CodeOfConduct: React.FC = () => (
   <>
+    <SEO
+      title="Code of Conduct"
+      description="Our pledge to foster an open, welcoming, diverse, inclusive, and harassment-free community for everyone in ONLY FOSS ORG."
+      canonical="https://onlyfossorg.github.io/code-of-conduct"
+    />
     <style>{`
       @keyframes grid-drift { 0%{transform:translateY(0)} 100%{transform:translateY(64px)} }
       .hero-grid {

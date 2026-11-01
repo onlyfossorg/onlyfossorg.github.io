@@ -5,12 +5,17 @@ import RevealOnScroll from "../components/RevealOnScroll.tsx";
 import Button from "../components/Button";
 import { FEATURES } from "../utils/constants";
 import { useNavigate, NavLink } from "react-router-dom";
+import SEO from "../components/SEO";
 
 const Home: React.FC = () => {
   const navigate = useNavigate();
 
   return (
     <>
+      <SEO
+        title="Open Source Student Developer Community & Hackathons"
+        description="ONLY FOSS ORG is an independent community that open-sources and incubates student college projects, organizes developer hackathons like FOSStober and Founding Dev Design Hackathon, and empowers builders worldwide."
+      />
       <style>{`
         @keyframes grid-drift {
           0%   { transform: translateY(0); }

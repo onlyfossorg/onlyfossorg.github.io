@@ -11,6 +11,7 @@ import {
 import { NavLink } from "react-router-dom";
 import RevealOnScroll from "../components/RevealOnScroll";
 import GlitchText from "../components/GlitchText";
+import SEO from "../components/SEO";
 
 interface DocSection {
   id: string;
@@ -131,6 +132,11 @@ const DOC_SECTIONS: DocSection[] = [
 
 const Documentation: React.FC = () => (
   <>
+    <SEO
+      title="Documentation"
+      description="Guides, tutorials, and developer documentation for contributing to ONLY FOSS ORG projects, Git workflows, and open-source tooling."
+      canonical="https://onlyfossorg.github.io/documentation"
+    />
     <style>{`
       @keyframes grid-drift { 0%{transform:translateY(0)} 100%{transform:translateY(64px)} }
       .hero-grid {

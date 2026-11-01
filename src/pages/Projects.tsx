@@ -14,6 +14,7 @@ import type { SortOption } from "../utils/constants";
 import type { Domain } from "../utils/types";
 import RevealOnScroll from "../components/RevealOnScroll";
 import GlitchText from "../components/GlitchText";
+import SEO from "../components/SEO";
 
 type StatusFilter = "all" | "active" | "dormant" | "idea";
 type DifficultyFilter = "all" | "beginner" | "intermediate" | "advanced";
@@ -133,6 +134,11 @@ const Projects: React.FC = () => {
 
   return (
     <>
+      <SEO
+        title="Explore Open Source Projects"
+        description="Browse student-led open-source projects incubated by ONLY FOSS ORG. Filter by domain, difficulty, and tech stack to find issues and contribute today."
+        canonical="https://onlyfossorg.github.io/projects"
+      />
       <style>{`
         @keyframes grid-drift { 0%{transform:translateY(0)} 100%{transform:translateY(64px)} }
         .hero-grid {

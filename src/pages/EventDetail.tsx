@@ -25,6 +25,7 @@ import SectionCards from "../components/events/SectionCards";
 import FaqAccordion from "../components/events/FaqAccordion";
 import EventSectionNav from "../components/events/EventSectionNav";
 import NotFound from "./NotFound";
+import SEO from "../components/SEO";
 
 function renderSection(section: EventSection) {
   if (section.kind === "cards" && section.cards) {
@@ -75,8 +76,37 @@ function EventDetail() {
   const isLive = currentStatus === "live";
   const userTzOffset = formatTimezoneOffset(userTz, now);
 
+  const eventJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "Event",
+    name: meta.title,
+    description: meta.summary,
+    startDate: meta.start,
+    endDate: meta.end || meta.start,
+    eventAttendanceMode: "https://schema.org/OnlineEventAttendanceMode",
+    eventStatus: isPast
+      ? "https://schema.org/EventCompleted"
+      : "https://schema.org/EventScheduled",
+    location: {
+      "@type": "VirtualLocation",
+      url: `https://onlyfossorg.github.io/events/${slug}`,
+    },
+    organizer: {
+      "@type": "Organization",
+      name: "ONLY FOSS ORG",
+      url: "https://onlyfossorg.github.io",
+    },
+  };
+
   return (
     <>
+      <SEO
+        title={meta.title}
+        description={meta.summary}
+        canonical={`https://onlyfossorg.github.io/events/${slug}`}
+        type="article"
+        jsonLd={eventJsonLd}
+      />
       <style>{`
         @keyframes grid-drift { 0%{transform:translateY(0)} 100%{transform:translateY(64px)} }
         .hero-grid {
